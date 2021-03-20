@@ -1,0 +1,5 @@
+test column type
+from api import db
+from api import Customer
+Customer.__table__.c['dob'].type
+type = Customer.updated_at.property.columns[0].type

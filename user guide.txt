@@ -1,0 +1,10 @@
+User guide
+
+download postgreSQL
+run the following commands:
+'pip install pipenv'
+'pipenv shell'
+'pipenv install flask'
+'pipenv install flask-SQLAlchemy'
+'pipenv install psycopg2' or 'pipev install psycopg2-binary'
+psycopg2 for production or psycopg2-binary for development and testing
