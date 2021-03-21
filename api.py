@@ -51,8 +51,8 @@ def protected():
 def login():
     auth = request.authorization
 
-    if auth and auth.password == 'qwe':
-        token = jwt.encode({'user': auth.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=30)}, 
+    if auth and auth.password == 'password':
+        token = jwt.encode({'user': auth.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, 
         app.config['SECRET_KEY'], algorithm="HS256")
         return jsonify({'token': token})
     
@@ -117,7 +117,7 @@ def delete_customer():
     
     Customer.query.filter_by(id=id_to_delete).delete()
     db.session.commit()
-    return {'deleted id': id_to_delete}
+    return jsonify({'deleted id': id_to_delete})
 
 # List the n youngest customers ordered by date of birth
 @app.route('/customers/youngest', methods=['GET'])
