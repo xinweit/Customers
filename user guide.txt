@@ -1,7 +1,8 @@
 User guide
 
 download postgreSQL
-run the following commands:
+create a folder for your project
+run the following commands in the project folder in terminal:
 'pip install pipenv'
 'pipenv shell'
 'pipenv install flask'

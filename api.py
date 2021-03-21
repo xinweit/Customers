@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+import jwt
 
 
 app = Flask(__name__)
@@ -47,7 +48,7 @@ def add_customer():
 # Read all customers
 @app.route('/customers', methods=['GET'])
 def get_all_Customers():
-    response = []
+    customers_list = []
     customers = Customer.query.all()
     for customer in customers:
         current_customer = {}
@@ -55,8 +56,8 @@ def get_all_Customers():
         current_customer['name'] = customer.name
         current_customer['dob'] = customer.dob
         current_customer['updated_at'] = customer.updated_at
-        response.append(current_customer)
-    return jsonify(response)
+        customers_list.append(current_customer)
+    return jsonify(customers_list)
 
 # Update a customer
 @app.route('/customers', methods=['PUT'])
@@ -88,9 +89,21 @@ def delete_customer():
     return {'deleted id': id_to_delete}
 
 # List the n youngest customers ordered by date of birth
-@app.route('/customers', methods=['GET'])
+@app.route('/customers/youngest', methods=['GET'])
 def get_youngest_customers():
-    pass
+    n = int(request.args.get('n', None))
+    customers_list = []
+    customers = Customer.query.all()
+    for customer in customers:
+        current_customer = {}
+        current_customer['id'] = customer.id
+        current_customer['name'] = customer.name
+        current_customer['dob'] = customer.dob
+        current_customer['updated_at'] = customer.updated_at
+        customers_list.append(current_customer)
+    sorted_customers_list = sorted(customers_list, key = lambda i: i['dob'])
+    youngest_customers_list = sorted_customers_list[:n]
+    return jsonify(youngest_customers_list) 
 
 if __name__ == '__main__':
     app.debug=True
