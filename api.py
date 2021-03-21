@@ -42,11 +42,7 @@ def token_required(f):
         return f(*args, **kwargs)
     return wrapped
 
-@app.route('/protected')
-@token_required
-def protected():
-    return jsonify({'message' : 'Only authorized users are allowed.'})
-
+# Log in to get a token
 @app.route('/login')
 def login():
     auth = request.authorization
