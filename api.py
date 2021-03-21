@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from flask_sqlalchemy import SQLAlchemy
+from functools import wraps
 import datetime
 import jwt
 
@@ -7,9 +8,9 @@ import jwt
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/customers'
+app.config['SECRET_KEY'] = 'secretkey'
 app.debug=True
 db=SQLAlchemy(app)
-
 
 class Customer(db.Model):
     __tablename__ = 'customers'
@@ -26,13 +27,40 @@ class Customer(db.Model):
 db.create_all()
 db.session.commit()
 
+def token_required(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        token = request.args.get('token')
+        
+        if not token:
+            return jsonify({'message' : 'Token is missing'}), 403
+        try:   
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+        except:
+            return jsonify({'message' : 'Token is invalid'}), 403
+        
+        return f(*args, **kwargs)
+    return wrapped
 
-@app.route('/test', methods=['GET'])
-def test():
-    return { 'test':'this is a test'}
+@app.route('/protected')
+@token_required
+def protected():
+    return jsonify({'message' : 'Only authorized users are allowed.'})
+
+@app.route('/login')
+def login():
+    auth = request.authorization
+
+    if auth and auth.password == 'qwe':
+        token = jwt.encode({'user': auth.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=30)}, 
+        app.config['SECRET_KEY'], algorithm="HS256")
+        return jsonify({'token': token})
+    
+    return make_response('Authentication failed.', 401, {'WWW-Authenticate': 'Basic realm = "Login Required"'})
 
 # Create a customer
 @app.route('/customers', methods=['POST'])
+@token_required
 def add_customer(): 
     customer_data = request.get_json()
     date = customer_data['dob'].split("-",2)
@@ -47,6 +75,7 @@ def add_customer():
 
 # Read all customers
 @app.route('/customers', methods=['GET'])
+@token_required
 def get_all_Customers():
     customers_list = []
     customers = Customer.query.all()
@@ -61,6 +90,7 @@ def get_all_Customers():
 
 # Update a customer
 @app.route('/customers', methods=['PUT'])
+@token_required
 def update_customer():
     id_to_update = int(request.args.get('update_id', None))
     updated_customer_data = request.get_json()
@@ -81,6 +111,7 @@ def update_customer():
 
 # Delete a customer
 @app.route('/customers', methods=['DELETE'])    
+@token_required
 def delete_customer():
     id_to_delete = int(request.args.get('delete_id', None))
     
@@ -90,6 +121,7 @@ def delete_customer():
 
 # List the n youngest customers ordered by date of birth
 @app.route('/customers/youngest', methods=['GET'])
+@token_required
 def get_youngest_customers():
     n = int(request.args.get('n', None))
     customers_list = []

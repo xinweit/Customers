@@ -1,10 +1,11 @@
-User guide
+User Guide
 
 download postgreSQL
 create a folder for your project
 run the following commands in the project folder in terminal:
 'pip install pipenv'
 'pipenv shell'
+activate a virtualenv
 'pipenv install flask'
 'pipenv install flask-SQLAlchemy'
 'pipenv install psycopg2' or 'pipev install psycopg2-binary'
