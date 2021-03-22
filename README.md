@@ -6,7 +6,7 @@
 
 1. Download the entire repository as a ZIP folder and extract the Klinify folder.
 
-## OR
+__OR__
 
 1. Download and install postgreSQL.
 2. Make sure Python is installed on your machine.
