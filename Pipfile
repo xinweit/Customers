@@ -9,6 +9,7 @@ psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 psycopg2 = "*"
 sqlalchemy = "*"
+pyjwt = "*"
 
 [dev-packages]
 

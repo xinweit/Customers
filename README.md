@@ -4,15 +4,20 @@
 
 ## Setup instructions:
 
-1. Download the entire repository as a ZIP folder and extract the Klinify folder.
+1. Download and install postgreSQL.
+2. Create a 'customers' database in PostgreSQL using psql or pgAdmin.
+3. Download the entire repository as a ZIP folder and extract the Klinify folder.
+4. In line 10 of the api.py file, for the line app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<owner>:<password>@localhost/customers', input the owner name and password of the 'customers' database.  
+For app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/customers', the owner name is 'postgres' and password is 'password'.
 
 __OR__
 
 1. Download and install postgreSQL.
-2. Make sure Python is installed on your machine.
-3. Create a folder for your project.
-4. Download the api.py file and put it in the project folder.
-5. Run the following commands in the project folder in terminal:  
+2. Create a 'customers' database in PostgreSQL using psql or pgAdmin.
+3. Make sure Python is installed on your machine.
+4. Create a folder for your project.
+5. Download the api.py file and put it in the project folder.
+6. Run the following commands in the project folder in terminal:  
 'pip install pipenv'  
 'pipenv shell'  
 -> activates a virtualenv
@@ -20,7 +25,10 @@ __OR__
 'pipenv install flask-SQLAlchemy'  
 'pipenv install sqlalchemy'  
 'pipenv install psycopg2' or 'pipev install psycopg2-binary'  
--> psycopg2 for production or psycopg2-binary for development and testing
+-> psycopg2 for production or psycopg2-binary for development and testing  
+'pipenv install pyjwt'
+7. In line 10 of the api.py file, for the line app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<owner>:<password>@localhost/customers', input the owner name and password of the 'customers' database.  
+For app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/customers', the owner name is 'postgres' and password is 'password'.
 
 <br>
 
@@ -34,7 +42,7 @@ Run 'pipenv shell', then 'python api.py' in your project folder path to run the 
 
 ### Authentication using JSON Web Token
 
-To generate a JSON Web Token (JWT) for access to the API endpoints, use this URL http://127.0.0.1:5000/login on Postman. In the Authorization tab, input any username and 'password' for the password field to generate a token. Send the request and the response containing the token will be generated. 
+To generate a JSON Web Token (JWT) for access to the API endpoints, use this URL http://127.0.0.1:5000/login on Postman. In the Authorization tab, input any username and 'password' as the default password to generate a token. Send the request and the response containing the token will be generated. 
 
 ![login_image](images/login.png)
 
