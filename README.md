@@ -7,7 +7,7 @@
 1. Download and install postgreSQL.
 2. Create a 'customers' database in PostgreSQL using psql or pgAdmin.
 3. Download the entire repository as a ZIP folder and extract the Klinify folder.
-4. In line 10 of the api.py file, for the line app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<owner>:<password>@localhost/customers', input the owner name and password of the 'customers' database.  
+4. In line 10 of the api.py file, for the line app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{owner}:{password}@localhost/customers', input the owner name and password of the 'customers' database.  
 For app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/customers', the owner name is 'postgres' and password is 'password'.
 
 __OR__
@@ -27,7 +27,7 @@ __OR__
 'pipenv install psycopg2' or 'pipev install psycopg2-binary'  
 -> psycopg2 for production or psycopg2-binary for development and testing  
 'pipenv install pyjwt'
-7. In line 10 of the api.py file, for the line app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://<owner>:<password>@localhost/customers', input the owner name and password of the 'customers' database.  
+7. In line 10 of the api.py file, for the line app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{owner}:{password}@localhost/customers', input the owner name and password of the 'customers' database.  
 For app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/customers', the owner name is 'postgres' and password is 'password'.
 
 <br>
