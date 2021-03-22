@@ -8,15 +8,15 @@
 2. Make sure Python in installed
 3. Create a folder for your project
 4. Download the api.py file and put it in the project folder 
-5. Run the following commands in the project folder in terminal: <br>
-    'pip install pipenv' <br>
-    'pipenv shell' <br>
-    -> activates a virtualenv
-    'pipenv install flask' <br>
-    'pipenv install flask-SQLAlchemy' <br>
-    'pipenv install sqlalchemy' <br>
-    'pipenv install psycopg2' or 'pipev install psycopg2-binary' <br>
-    -> psycopg2 for production or psycopg2-binary for development and testing
+5. Run the following commands in the project folder in terminal:  
+'pip install pipenv'  
+'pipenv shell'  
+-> activates a virtualenv
+'pipenv install flask'  
+'pipenv install flask-SQLAlchemy'  
+'pipenv install sqlalchemy'  
+'pipenv install psycopg2' or 'pipev install psycopg2-binary'  
+-> psycopg2 for production or psycopg2-binary for development and testing
 
 <br>
 
