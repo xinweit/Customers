@@ -54,7 +54,7 @@ To get a list of all the customers, use http://127.0.0.1:5000/customers/read?tok
 
 ### Update a customer
 
-To update a customer, use http://127.0.0.1:5000/customers/update?update_id=[customer_id]&?token=[generated_token] where customer_id is the id of the customer to be updated and generated_token is the token generated after login. Include the new name and date of birth of the customer as JSON in the request body.
+To update a customer, use http://127.0.0.1:5000/customers/update?update_id=[customer_id]&token=[generated_token] where customer_id is the id of the customer to be updated and generated_token is the token generated after login. Include the new name and date of birth of the customer as JSON in the request body.
 
 ![login_image](images/update.png)
 
@@ -62,7 +62,7 @@ To update a customer, use http://127.0.0.1:5000/customers/update?update_id=[cust
 
 ### Delete a customer
 
-To delete a customer, use http://127.0.0.1:5000/customers/delete?delete_id=[customer_id]&?token=[generated_token] where customer_id is the id of the customer to be deleted and generated_token is the token generated after login.
+To delete a customer, use http://127.0.0.1:5000/customers/delete?delete_id=[customer_id]&token=[generated_token] where customer_id is the id of the customer to be deleted and generated_token is the token generated after login.
 
 ![login_image](images/delete.png)
 
