@@ -4,10 +4,10 @@
 
 ## Setup instructions:
 
-1. Download and install postgreSQL
-2. Make sure Python in installed
-3. Create a folder for your project
-4. Download the api.py file and put it in the project folder 
+1. Download and install postgreSQL.
+2. Make sure Python is installed on your machine.
+3. Create a folder for your project.
+4. Download the api.py file and put it in the project folder.
 5. Run the following commands in the project folder in terminal:  
 'pip install pipenv'  
 'pipenv shell'  
@@ -22,7 +22,7 @@
 
 ## Usage instructions:
 
-Run 'pipenv shell', then 'python api.py' in your project folder path to run the Application Programming Interface (API). The application is set to run on port 5000 by default on http://127.0.0.1:5000.
+Run 'pipenv shell', then 'python api.py' in your project folder path to run the Application Programming Interface (API). The application is set to run on port 5000 by default on the URL http://127.0.0.1:5000.
 <br>
 [ ] is used a placeholder for text in the URLs below.
 
