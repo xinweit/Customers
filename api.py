@@ -55,7 +55,7 @@ def login():
     return make_response('Authentication failed.', 401, {'WWW-Authenticate': 'Basic realm = "Login Required"'})
 
 # Create a customer
-@app.route('/customers', methods=['POST'])
+@app.route('/customers/create', methods=['POST'])
 @token_required
 def add_customer(): 
     customer_data = request.get_json()
@@ -67,10 +67,10 @@ def add_customer():
     customer = Customer(name = customer_data['name'], dob = datetime.date(year, month, day))
     db.session.add(customer)
     db.session.commit()
-    return jsonify(customer_data)
+    return jsonify({'message' : "The customer's details have been added."})
 
 # Read all customers
-@app.route('/customers', methods=['GET'])
+@app.route('/customers/read', methods=['GET'])
 @token_required
 def get_all_Customers():
     customers_list = []
@@ -85,16 +85,14 @@ def get_all_Customers():
     return jsonify(customers_list)
 
 # Update a customer
-@app.route('/customers', methods=['PUT'])
+@app.route('/customers/update', methods=['PUT'])
 @token_required
 def update_customer():
     id_to_update = int(request.args.get('update_id', None))
     updated_customer_data = request.get_json()
     updated_name = updated_customer_data['name']
-    print(updated_name)
     updated_date = updated_customer_data['dob'].split("-",2)
     year = int(updated_date[0])
-    print(year)
     month = int(updated_date[1])
     day = int(updated_date[2])
 
@@ -103,17 +101,17 @@ def update_customer():
     customer.dob = datetime.date(year, month, day)
     customer.updated_at = datetime.datetime.now()
     db.session.commit()
-    return jsonify(updated_customer_data)
+    return jsonify({'message' : "The customer's details have been updated."})
 
 # Delete a customer
-@app.route('/customers', methods=['DELETE'])    
+@app.route('/customers/delete', methods=['DELETE'])    
 @token_required
 def delete_customer():
     id_to_delete = int(request.args.get('delete_id', None))
     
     Customer.query.filter_by(id=id_to_delete).delete()
     db.session.commit()
-    return jsonify({'deleted id': id_to_delete})
+    return jsonify({'message' : "The customer's details have been deleted."})
 
 # List the n youngest customers ordered by date of birth
 @app.route('/customers/youngest', methods=['GET'])
@@ -129,7 +127,7 @@ def get_youngest_customers():
         current_customer['dob'] = customer.dob
         current_customer['updated_at'] = customer.updated_at
         customers_list.append(current_customer)
-    sorted_customers_list = sorted(customers_list, key = lambda i: i['dob'])
+    sorted_customers_list = sorted(customers_list, key = lambda i: i['dob'], reverse = True)
     youngest_customers_list = sorted_customers_list[:n]
     return jsonify(youngest_customers_list) 
 
