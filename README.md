@@ -16,7 +16,7 @@ __OR__
 2. Create a 'customers' database in PostgreSQL using psql or pgAdmin.
 3. Make sure Python is installed on your machine.
 4. Create a folder for your project.
-5. Download the api.py file and put it in the project folder.
+5. Copy the contents of the api.py file in the repository into your own api.py file and put it in the project folder.
 6. Run the following commands in the project folder in terminal:  
 'pip install pipenv'  
 'pipenv shell'  
