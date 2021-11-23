@@ -1,5 +1,6 @@
 # User Guide
 
+Simple RESTful application to keep track of customers
 <br>
 
 ## Setup instructions:
